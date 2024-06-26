@@ -50,7 +50,7 @@ Console.WriteLine();
 
 async Task<int> WaitAndPrintAsync(int input)
 {
-    //Simulate a read asynchronous operation.
+    //Simulate a real asynchronous operation.
     await httpClient.GetAsync("https://google.com/");
 
     return input;
