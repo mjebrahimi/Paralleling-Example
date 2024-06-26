@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-int[] inputList = [1, 2, 3, 2, 1];
+int[] inputList = [1, 2, 3, 4, 5];
 
 {
     var tasks = inputList.Select(WaitAndPrintAsync).ToList();
@@ -9,13 +9,13 @@ int[] inputList = [1, 2, 3, 2, 1];
 
     var outputList = tasks.ConvertAll(task => task.Result);
 
-    Console.WriteLine("Order of execution using Select Task (in order)");
+    Console.WriteLine("Order of output using Select Task (in order)");
 
     foreach (var output in outputList)
         Console.WriteLine(output);
 
     //OUTPUT:
-    //Order of execution using Select Task
+    //Order of output using Select Task
     //1
     //2
     //3
@@ -34,13 +34,13 @@ Console.WriteLine();
         outputList.Add(output);
     });
 
-    Console.WriteLine("Order of execution using Parallel.ForEachAsync (out of order)");
+    Console.WriteLine("Order of output using Parallel.ForEachAsync (out of order)");
 
     foreach (var output in outputList)
         Console.WriteLine(output);
 
     //OUTPUT:
-    //Order of execution using Parallel.ForEachAsync
+    //Order of output using Parallel.ForEachAsync (out of order)
     //3
     //2
     //1
