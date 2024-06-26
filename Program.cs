@@ -9,11 +9,12 @@ int[] inputList = [1, 2, 3, 2, 1];
 
     var outputList = tasks.ConvertAll(task => task.Result);
 
-    Console.WriteLine("Order of execution using Select Task");
+    Console.WriteLine("Order of execution using Select Task (in order)");
 
     foreach (var output in outputList)
         Console.WriteLine(output);
 
+    //OUTPUT:
     //Order of execution using Select Task
     //1
     //2
@@ -33,15 +34,16 @@ Console.WriteLine();
         outputList.Add(output);
     });
 
-    Console.WriteLine("Order of execution using Parallel.ForEachAsync");
+    Console.WriteLine("Order of execution using Parallel.ForEachAsync (out of order)");
 
     foreach (var output in outputList)
         Console.WriteLine(output);
 
+    //OUTPUT:
     //Order of execution using Parallel.ForEachAsync
+    //3
     //2
     //1
-    //3
     //2
     //1
 }
