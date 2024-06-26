@@ -1,6 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿int[] inputList = [1, 2, 3, 4, 5];
 
-int[] inputList = [1, 2, 3, 4, 5];
+var httpClient = new HttpClient();
 
 {
     var tasks = inputList.Select(WaitAndPrintAsync).ToList();
@@ -15,18 +15,18 @@ int[] inputList = [1, 2, 3, 4, 5];
         Console.WriteLine(output);
 
     //OUTPUT:
-    //Order of output using Select Task
+    //Order of output using Select Task (in order)
     //1
     //2
     //3
-    //2
-    //1
+    //4
+    //5
 }
 
 Console.WriteLine();
 
 {
-    ConcurrentBag<int> outputList = [];
+    List<int> outputList = [];
 
     await Parallel.ForEachAsync(inputList, async (input, _) =>
     {
@@ -41,15 +41,17 @@ Console.WriteLine();
 
     //OUTPUT:
     //Order of output using Parallel.ForEachAsync (out of order)
+    //5
+    //1
+    //4
+    //2
     //3
-    //2
-    //1
-    //2
-    //1
 }
 
-static async Task<int> WaitAndPrintAsync(int input)
+async Task<int> WaitAndPrintAsync(int input)
 {
-    await Task.Delay(input * 100);
+    //Simulate a read asynchronous operation.
+    await httpClient.GetAsync("https://google.com/");
+
     return input;
 }
